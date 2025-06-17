@@ -854,6 +854,30 @@ const otBorderRoutingCounters *otIp6GetBorderRoutingCounters(otInstance *aInstan
 void otIp6ResetBorderRoutingCounters(otInstance *aInstance);
 
 /**
+ * Pointer is called when an IPv6 message is removed from the send queue.
+ *
+ * This is used in `otIp6RegisterTxCallback()`.
+ *
+ * @param[in]  aMessage  A pointer to an IPv6 message being removed from the send queue.
+ * @param[in]  aError    A result of sending the message.
+ * @param[in]  aContext  A pointer to application-specific context.
+ *
+ */
+typedef void (*otIp6TxCallback)(otMessage *aMessage, otError aError, void *aContext);
+
+/**
+ * Registers a callback that is called when an IPv6 message is removed from the send queue.
+ *
+ * Requires `OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE`.
+ *
+ * @param[in]  aInstance  A pointer to an OpenThread instance.
+ * @param[in]  aCallback  A pointer to a function that is called when an IPv6 message is removed from the send queue.
+ * @param[in]  aContext   A pointer to application-specific context.
+ *
+ */
+void otIp6RegisterTxCallback(otInstance *aInstance, otIp6TxCallback aCallback, void *aContext);
+
+/**
  * @}
  */
 

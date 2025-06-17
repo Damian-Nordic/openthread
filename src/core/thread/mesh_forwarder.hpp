@@ -339,6 +339,17 @@ public:
     void HandleDeferredAck(Neighbor &aNeighbor, Error aError);
 #endif
 
+#if OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+    /**
+     * Registers a callback that is called when an IPv6 message is removed from the send queue.
+     *
+     * @param[in]  aCallback A pointer to a function that is called when an IPv6 message is removed from the send queue.
+     * @param[in]  aContext  A pointer to application-specific context.
+     *
+     */
+    void RegisterIp6TxCallback(otIp6TxCallback aCallback, void *aContext) { mIp6TxCallback.Set(aCallback, aContext); }
+#endif
+
 private:
     static constexpr uint8_t kFailedRouterTransmissions      = 4;
     static constexpr uint8_t kFailedCslDataPollTransmissions = 15;
@@ -655,6 +666,9 @@ private:
 
 #if OPENTHREAD_CONFIG_TX_QUEUE_STATISTICS_ENABLE
     TxQueueStats mTxQueueStats;
+#endif
+#if OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+    Callback<otIp6TxCallback> mIp6TxCallback;
 #endif
 };
 

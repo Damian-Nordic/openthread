@@ -1318,6 +1318,9 @@ void MeshForwarder::FinalizeMessageDirectTx(Message &aMessage, Error aError)
 
     if (aMessage.GetType() == Message::kTypeIp6)
     {
+#if OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+        mIp6TxCallback.InvokeIfSet(&aMessage, aError);
+#endif
         aMessage.GetTxSuccess() ? mIpCounters.mTxSuccess++ : mIpCounters.mTxFailure++;
     }
 

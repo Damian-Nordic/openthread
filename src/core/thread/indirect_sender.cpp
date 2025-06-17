@@ -518,6 +518,10 @@ void IndirectSender::HandleSentFrameToChild(const Mac::TxFrame &aFrame,
 
         if (message->GetType() == Message::kTypeIp6)
         {
+#if OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+            Get<MeshForwarder>().mIp6TxCallback.InvokeIfSet(message, txError);
+#endif
+
             if (aChild.GetIndirectTxSuccess())
             {
                 Get<MeshForwarder>().mIpCounters.mTxSuccess++;

@@ -198,6 +198,19 @@
 #endif
 
 /**
+ *
+ * @def OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+ *
+ * Define as 1 to enable the IPv6 message TX callback.
+ *
+ * When enabled, allows for registering a callback that is called when an IPv6 message is removed from the send queue.
+ * The callback takes an argument that tells whether the message is removed due to a successful transmission or failure.
+ */
+#ifndef OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE
+#define OPENTHREAD_CONFIG_TX_CALLBACK_API_ENABLE 0
+#endif
+
+/**
  * @}
  */
 
